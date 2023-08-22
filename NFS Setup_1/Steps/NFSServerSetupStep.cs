@@ -6,12 +6,12 @@
     using Skyline.DataMiner.CommunityLibrary.Linux.OperatingSystems;
     using Skyline.DataMiner.Net.Serialization;
 
-    public class NFSHostSetupStep : ILinuxAction
+    public class NFSServerSetupStep : ILinuxAction
     {
         private NFSSetupModel model;
         private string repoPath;
 
-        public NFSHostSetupStep(NFSSetupModel model)
+        public NFSServerSetupStep(NFSSetupModel model)
         {
             this.model = model;
             this.repoPath = model.RepoPath;

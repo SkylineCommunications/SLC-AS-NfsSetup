@@ -20,7 +20,7 @@
 
         public bool AsHost { get; set; }
 
-        public string NFSHost { get; set; }
+        public string NFSServer { get; set; }
 
     }
 }

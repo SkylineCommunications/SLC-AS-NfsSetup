@@ -178,7 +178,7 @@ namespace NFS_Setup_1
 
             if (model.AsHost)
             {
-                steps.Add(new NFSHostSetupStep(model));
+                steps.Add(new NFSServerSetupStep(model));
             }
             else
             {

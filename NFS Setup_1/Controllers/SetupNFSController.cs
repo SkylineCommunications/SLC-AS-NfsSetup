@@ -53,7 +53,7 @@
 
                 var steps = new List<ILinuxAction>() { };
                 steps.Add(new CreateNFSFolderStep(model));
-                steps.Add(new NFSHostSetupStep(model));
+                steps.Add(new NFSServerSetupStep(model));
 
                 int numberOfSteps = steps.Count();
 

@@ -16,7 +16,7 @@
         {
             this.model = model;
             this.repoPath = model.RepoPath;
-            this.host = model.NFSHost;
+            this.host = model.NFSServer;
         }
 
         public InstallationStepResult TryRunStep(ILinux linux)
