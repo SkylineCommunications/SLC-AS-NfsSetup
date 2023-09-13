@@ -2,11 +2,10 @@
 {
     using System;
     using Skyline.DataMiner.CommunityLibrary.Linux;
-    using Skyline.DataMiner.CommunityLibrary.Linux.Actions.ActionSteps;
     using Skyline.DataMiner.CommunityLibrary.Linux.OperatingSystems;
     using Skyline.DataMiner.Net.Serialization;
 
-    public class NFSServerSetupStep : ILinuxAction
+    public class NFSServerSetupStep : IInstallerAction
     {
         private NFSSetupModel model;
         private string repoPath;
@@ -21,13 +20,13 @@
         {
             try
             {
-                switch (model.Server.OS.Type)
+                switch (model.Server.OsInfo.OsType)
                 {
                     case OperatingSystemType.Debian:
                         DebianSteps(linux);
                         break;
 
-                    case OperatingSystemType.RedHat:
+                    case OperatingSystemType.RHEL:
                         CentOSSteps(linux);
                         break;
 

@@ -60,8 +60,8 @@ namespace NFS_Setup_1
     using NFS_Setup_1.Controllers;
     using NFS_Setup_1.Steps;
     using NFS_Setup_1.Views;
-    using Skyline.DataMiner.Automation;
-    using Skyline.DataMiner.CommunityLibrary.Linux.Actions.ActionSteps;
+
+	using Skyline.DataMiner.Automation;
     using Skyline.DataMiner.Net.Messages;
     using Skyline.DataMiner.Utils.InteractiveAutomationScript;
 
@@ -89,6 +89,7 @@ namespace NFS_Setup_1
 
             string input = engine.GetScriptParam("Input").Value;
             var model = JsonConvert.DeserializeObject<NFSSetupModel>(input);
+            engine.GenerateInformation("Nfs Host is : " + model.NFSServer);
 
             try
             {
@@ -173,7 +174,7 @@ namespace NFS_Setup_1
         {
             model.Server = UtilityFunctions.ConnectToLinuxServer(model.Host, model.Username, model.Password);
 
-            var steps = new List<ILinuxAction>() { };
+            var steps = new List<IInstallerAction>() { };
             steps.Add(new CreateNFSFolderStep(model));
 
             if (model.AsHost)
@@ -190,7 +191,7 @@ namespace NFS_Setup_1
             int i = 1;
             bool installSucceeded = true;
 
-            foreach (var result in model.Server.RunActions(steps))
+            foreach (var result in model.Server.TryRunActions(steps))
             {
                 installSucceeded &= result.Succeeded;
                 engine.GenerateInformation($"{result.Result}");

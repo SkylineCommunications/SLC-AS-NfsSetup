@@ -2,9 +2,8 @@
 {
     using System;
     using Skyline.DataMiner.CommunityLibrary.Linux;
-    using Skyline.DataMiner.CommunityLibrary.Linux.Actions.ActionSteps;
 
-    public class CreateNFSFolderStep : ILinuxAction
+    public class CreateNFSFolderStep : IInstallerAction
     {
         private NFSSetupModel model;
 

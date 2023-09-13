@@ -24,6 +24,6 @@
   </ProjectExtensions>
   <ItemGroup>
     <PackageReference Include="Skyline.DataMiner.Utils.InteractiveAutomationScriptToolkit" Version="6.1.0" />
-    <PackageReference Include="SLC.CLib.Linux" Version="1.0.0-opensearch.dev.16" />
+    <PackageReference Include="SLC.CLib.Linux" Version="1.0.0-dev.CassandraInstaller.1" />
   </ItemGroup>
 </Project>

@@ -11,7 +11,6 @@
     using Renci.SshNet.Common;
     using Skyline.DataMiner.Automation;
     using Skyline.DataMiner.CommunityLibrary.Linux;
-    using Skyline.DataMiner.CommunityLibrary.Linux.Actions.ActionSteps;
     using Skyline.DataMiner.CommunityLibrary.Linux.Communication;
     using Skyline.DataMiner.Utils.InteractiveAutomationScript;
 
@@ -51,7 +50,7 @@
             {
                 model.RepoPath = setupNFSView.RepoPath.Text;
 
-                var steps = new List<ILinuxAction>() { };
+                var steps = new List<IInstallerAction>() { };
                 steps.Add(new CreateNFSFolderStep(model));
                 steps.Add(new NFSServerSetupStep(model));
 
@@ -60,7 +59,7 @@
                 int i = 1;
                 bool installSucceeded = true;
 
-                foreach (var result in model.Server.RunActions(steps))
+                foreach (var result in model.Server.TryRunActions(steps))
                 {
                     setupNFSView.StartInstalling();
                     installSucceeded &= result.Succeeded;

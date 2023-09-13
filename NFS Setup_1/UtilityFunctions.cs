@@ -8,7 +8,7 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    internal class UtilityFunctions
+    internal static class UtilityFunctions
     {
         /// <summary>
 		/// Method to connect to the Linux server.
@@ -31,5 +31,19 @@
 
             return linux;
         }
-    }
+
+		public static IEnumerable<InstallationStepResult> TryRunActions(this ILinux linux, IEnumerable<IInstallerAction> steps)
+		{
+			foreach (var step in steps)
+			{
+				var result = step.TryRunStep(linux);
+				yield return result;
+				if (!result.Succeeded)
+				{
+					// Don't continue if one step failed.
+					break;
+				}
+			}
+		}
+	}
 }
