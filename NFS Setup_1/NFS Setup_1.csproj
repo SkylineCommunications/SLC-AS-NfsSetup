@@ -23,6 +23,7 @@
     </VisualStudio>
   </ProjectExtensions>
   <ItemGroup>
+    <PackageReference Include="Skyline.DataMiner.Dev.Automation" Version="10.3.10.1" />
     <PackageReference Include="Skyline.DataMiner.Utils.InteractiveAutomationScriptToolkit" Version="6.1.0" />
     <PackageReference Include="SLC.CLib.Linux" Version="1.0.0-dev.CassandraInstaller.10" />
   </ItemGroup>
