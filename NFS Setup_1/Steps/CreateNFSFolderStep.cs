@@ -1,7 +1,7 @@
 ﻿namespace NFS_Setup_1.Steps
 {
     using System;
-    using Skyline.DataMiner.CommunityLibrary.Linux;
+    using Skyline.DataMiner.Utils.Linux;
 
     public class CreateNFSFolderStep : IInstallerAction
     {

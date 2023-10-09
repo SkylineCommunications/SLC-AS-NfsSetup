@@ -10,8 +10,8 @@
     using Renci.SshNet;
     using Renci.SshNet.Common;
     using Skyline.DataMiner.Automation;
-    using Skyline.DataMiner.CommunityLibrary.Linux;
-    using Skyline.DataMiner.CommunityLibrary.Linux.Communication;
+    using Skyline.DataMiner.Utils.Linux;
+    using Skyline.DataMiner.Utils.Linux.Communication;
     using Skyline.DataMiner.Utils.InteractiveAutomationScript;
 
     public class SetupNFSController

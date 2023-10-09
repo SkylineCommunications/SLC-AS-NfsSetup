@@ -1,7 +1,7 @@
 ﻿namespace NFS_Setup_1
 {
-    using Skyline.DataMiner.CommunityLibrary.Linux.Communication;
-    using Skyline.DataMiner.CommunityLibrary.Linux;
+    using Skyline.DataMiner.Utils.Linux.Communication;
+    using Skyline.DataMiner.Utils.Linux;
     using System;
     using System.Collections.Generic;
     using System.Linq;

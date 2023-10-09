@@ -1,8 +1,8 @@
 ﻿namespace NFS_Setup_1.Steps
 {
     using System;
-    using Skyline.DataMiner.CommunityLibrary.Linux;
-    using Skyline.DataMiner.CommunityLibrary.Linux.OperatingSystems;
+    using Skyline.DataMiner.Utils.Linux;
+    using Skyline.DataMiner.Utils.Linux.OperatingSystems;
     using Skyline.DataMiner.Net.Serialization;
 
     public class NFSServerSetupStep : IInstallerAction

@@ -5,7 +5,7 @@
 	using System.Linq;
 	using System.Text;
 	using System.Threading.Tasks;
-	using Skyline.DataMiner.CommunityLibrary.Linux;
+	using Skyline.DataMiner.Utils.Linux;
 
 	public interface IInstallerAction
 	{

@@ -1,6 +1,6 @@
 ﻿namespace NFS_Setup_1
 {
-    using Skyline.DataMiner.CommunityLibrary.Linux;
+    using Skyline.DataMiner.Utils.Linux;
 
     public class NFSSetupModel
     {
