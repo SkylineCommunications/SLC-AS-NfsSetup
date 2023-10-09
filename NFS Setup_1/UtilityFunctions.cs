@@ -1,16 +1,14 @@
 ﻿namespace NFS_Setup_1
 {
-    using Skyline.DataMiner.Utils.Linux.Communication;
-    using Skyline.DataMiner.Utils.Linux;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
+	using System;
+	using System.Collections.Generic;
 
-    internal static class UtilityFunctions
-    {
-        /// <summary>
+	using Skyline.DataMiner.Utils.Linux;
+	using Skyline.DataMiner.Utils.Linux.Communication;
+
+	internal static class UtilityFunctions
+	{
+		/// <summary>
 		/// Method to connect to the Linux server.
 		/// </summary>
 		/// <param name="host">IP address of the Linux server.</param>
@@ -18,19 +16,19 @@
 		/// <param name="password">Password of the Linux server.</param>
 		/// <returns>Returns Linux instance.</returns>
 		public static ILinux ConnectToLinuxServer(string host, string username, string password)
-        {
-            ConnectionSettings settings = new ConnectionSettings(host, username, password);
-            ISshConnection connections = SshConnectionFactory.GetSshConnection(settings);
-            var linux = LinuxFactory.GetLinux(connections);
-            linux.Connection.Connect();
+		{
+			ConnectionSettings settings = new ConnectionSettings(host, username, password);
+			ISshConnection connections = SshConnectionFactory.GetSshConnection(settings);
+			var linux = LinuxFactory.GetLinux(connections);
+			linux.Connection.Connect();
 
-            if (string.IsNullOrWhiteSpace(linux.Connection.RunCommand("whoami")))
-            {
-                throw new Exception("Connection to server failed, please try again.");
-            }
+			if (string.IsNullOrWhiteSpace(linux.Connection.RunCommand("whoami")))
+			{
+				throw new Exception("Connection to server failed, please try again.");
+			}
 
-            return linux;
-        }
+			return linux;
+		}
 
 		public static IEnumerable<InstallationStepResult> TryRunActions(this ILinux linux, IEnumerable<IInstallerAction> steps)
 		{

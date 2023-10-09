@@ -1,87 +1,83 @@
 ﻿namespace NFS_Setup_1.Controllers
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Net.Sockets;
-    using NFS_Setup_1;
-    using NFS_Setup_1.Steps;
-    using NFS_Setup_1.Views;
-    using Renci.SshNet;
-    using Renci.SshNet.Common;
-    using Skyline.DataMiner.Automation;
-    using Skyline.DataMiner.Utils.Linux;
-    using Skyline.DataMiner.Utils.Linux.Communication;
-    using Skyline.DataMiner.Utils.InteractiveAutomationScript;
+	using System;
+	using System.Collections.Generic;
+	using System.Linq;
 
-    public class SetupNFSController
-    {
-        private readonly SetupNFSView setupNFSView;
-        private readonly NFSSetupModel model;
+	using NFS_Setup_1;
+	using NFS_Setup_1.Steps;
+	using NFS_Setup_1.Views;
 
-        public SetupNFSController(Engine engine, SetupNFSView view, NFSSetupModel model)
-        {
-            this.setupNFSView = view;
-            this.model = model;
-            this.Engine = engine;
+	using Skyline.DataMiner.Automation;
 
-            view.SetupNFSButton.Pressed += OnSetupNFSButtonPressed;
-            view.NextButton.Pressed += OnNextButtonPressed;
-        }
+	public class SetupNFSController
+	{
+		private readonly SetupNFSView setupNFSView;
+		private readonly NFSSetupModel model;
 
-        public event EventHandler<EventArgs> Next;
+		public SetupNFSController(Engine engine, SetupNFSView view, NFSSetupModel model)
+		{
+			this.setupNFSView = view;
+			this.model = model;
+			this.Engine = engine;
 
-        public Engine Engine { get; set; }
+			view.SetupNFSButton.Pressed += OnSetupNFSButtonPressed;
+			view.NextButton.Pressed += OnNextButtonPressed;
+		}
 
-        public void InitializeView()
-        {
-            setupNFSView.InitializeScreen();
-            this.setupNFSView.NextButton.IsEnabled = false;
-        }
+		public event EventHandler<EventArgs> Next;
 
-        public void EmptyView()
-        {
-            this.setupNFSView.Clear();
-        }
+		public Engine Engine { get; set; }
 
-        private void OnSetupNFSButtonPressed(object sender, EventArgs e)
-        {
-            try
-            {
-                model.RepoPath = setupNFSView.RepoPath.Text;
+		public void InitializeView()
+		{
+			setupNFSView.InitializeScreen();
+			this.setupNFSView.NextButton.IsEnabled = false;
+		}
 
-                var steps = new List<IInstallerAction>() { };
-                steps.Add(new CreateNFSFolderStep(model));
-                steps.Add(new NFSServerSetupStep(model));
+		public void EmptyView()
+		{
+			this.setupNFSView.Clear();
+		}
 
-                int numberOfSteps = steps.Count();
+		private void OnSetupNFSButtonPressed(object sender, EventArgs e)
+		{
+			try
+			{
+				model.RepoPath = setupNFSView.RepoPath.Text;
 
-                int i = 1;
-                bool installSucceeded = true;
+				var steps = new List<IInstallerAction>() { };
+				steps.Add(new CreateNFSFolderStep(model));
+				steps.Add(new NFSServerSetupStep(model));
 
-                foreach (var result in model.Server.TryRunActions(steps))
-                {
-                    setupNFSView.StartInstalling();
-                    installSucceeded &= result.Succeeded;
-                    setupNFSView.AddInstallationFeedback($"({i}/{numberOfSteps}) {result.Result}");
-                    i++;
-                    if (result.Succeeded != true)
-                    {
-                        break;
-                    }
-                }
+				int numberOfSteps = steps.Count();
 
-                setupNFSView.SetInstallationResult(installSucceeded);
-            }
-            catch
-            {
-                throw new Exception();
-            }
-        }
+				int i = 1;
+				bool installSucceeded = true;
 
-        private void OnNextButtonPressed(object sender, EventArgs e)
-        {
-            Next?.Invoke(this, EventArgs.Empty);
-        }
-    }
+				foreach (var result in model.Server.TryRunActions(steps))
+				{
+					setupNFSView.StartInstalling();
+					installSucceeded &= result.Succeeded;
+					setupNFSView.AddInstallationFeedback($"({i}/{numberOfSteps}) {result.Result}");
+					i++;
+					if (result.Succeeded != true)
+					{
+						break;
+					}
+				}
+
+				setupNFSView.SetInstallationResult(installSucceeded);
+			}
+			catch
+			{
+				throw new Exception();
+			}
+		}
+
+		private void OnNextButtonPressed(object sender, EventArgs e)
+		{
+			Next?.Invoke(this, EventArgs.Empty);
+		}
+	}
 }
