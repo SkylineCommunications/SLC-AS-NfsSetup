@@ -52,6 +52,7 @@
 			else
 			{
 				// lib -> rpc -> keyutils -> commomn -> server
+				linux.Connection.RunCommand($"sudo dpkg -i opensearch/libevent*");
 				linux.Connection.RunCommand($"sudo dpkg -i opensearch/libnfs*");
 				linux.Connection.RunCommand($"sudo dpkg -i opensearch/rpc*");
 				linux.Connection.RunCommand($"sudo dpkg -i opensearch/keyutils*");
