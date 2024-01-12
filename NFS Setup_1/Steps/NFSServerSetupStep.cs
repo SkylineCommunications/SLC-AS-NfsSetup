@@ -49,16 +49,17 @@
 				linux.Connection.RunCommand($"sudo apt update");
 				linux.Connection.RunCommand($"sudo apt install nfs-kernel-server -y");
 			}
-			else
-			{
-				// lib -> rpc -> keyutils -> commomn -> server
-				linux.Connection.RunCommand($"sudo dpkg -i opensearch-?.?.?/libevent*");
-				linux.Connection.RunCommand($"sudo dpkg -i opensearch-?.?.?/libnfs*");
-				linux.Connection.RunCommand($"sudo dpkg -i opensearch-?.?.?/rpc*");
-				linux.Connection.RunCommand($"sudo dpkg -i opensearch-?.?.?/keyutils*");
-				linux.Connection.RunCommand($"sudo dpkg -i opensearch-?.?.?/nfs-common*");
-				linux.Connection.RunCommand($"sudo dpkg -i opensearch-?.?.?/nfs-kernel-server*");
-			}
+			//// Currently installed as part of the OpenSearch Installer Script
+			//else
+			//{
+			//	// lib -> rpc -> keyutils -> commomn -> server
+			//	linux.Connection.RunCommand($"sudo dpkg -i opensearch-?.?.?/libevent*");
+			//	linux.Connection.RunCommand($"sudo dpkg -i opensearch-?.?.?/libnfs*");
+			//	linux.Connection.RunCommand($"sudo dpkg -i opensearch-?.?.?/rpc*");
+			//	linux.Connection.RunCommand($"sudo dpkg -i opensearch-?.?.?/keyutils*");
+			//	linux.Connection.RunCommand($"sudo dpkg -i opensearch-?.?.?/nfs-common*");
+			//	linux.Connection.RunCommand($"sudo dpkg -i opensearch-?.?.?/nfs-kernel-server*");
+			//}
 
 			linux.Connection.RunCommand($@"echo ""{repoPath} *(rw,sync,no_root_squash,no_subtree_check)"" | sudo tee -a /etc/exports");
 			linux.Connection.RunCommand("sudo systemctl restart nfs-kernel-server");
@@ -70,11 +71,12 @@
 			{
 				linux.Connection.RunCommand($"sudo yum -y install nfs-utils");
 			}
-			else
-			{
-				// install all except opensearch
-				linux.Connection.RunCommand($"sudo yum -y install opensearch/*.rpm");
-			}
+			//// Currently installed as part of the OpenSearch Installer Script
+			//else
+			//{
+			//	// install all except opensearch
+			//	linux.Connection.RunCommand($"sudo yum -y install opensearch-?.?.?/*.rpm");
+			//}
 
 			linux.Connection.RunCommand($@"echo ""{repoPath} *(rw,sync,no_root_squash,no_subtree_check)"" | sudo tee -a /etc/exports");
 			linux.Connection.RunCommand("sudo systemctl restart nfs-server");
